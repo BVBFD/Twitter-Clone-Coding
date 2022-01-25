@@ -28,16 +28,15 @@ export async function getById(id) {
   return tweets.find((tweet) => tweet.id === id);
 }
 
-export async function create(text, name, username) {
+export async function create(text, userId) {
   const tweet = {
     id: Date.now().toString(),
     text,
     createdAt: new Date(),
-    name,
-    username,
+    userId,
   };
   tweets = [tweet, ...tweets];
-  return tweet;
+  return getById(tweet.id);
 }
 
 export async function update(id, text) {
