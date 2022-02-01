@@ -6,6 +6,8 @@ import helmet from "helmet";
 import tweetsRouter from "./router/tweets.js";
 import authRouter from "./router/auth.js";
 import { config } from "./config.js";
+import { initSocket } from "./connection/socket.js";
+// import { Server } from "socket.io";
 
 const app = express();
 
@@ -26,4 +28,17 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-app.listen(config.host.port);
+const server = app.listen(config.host.port);
+// const socketIO = new Server(server, {
+//   cors: {
+//     origin: "*",
+//   },
+// });
+
+// socketIO.on("connection", (socket) => {
+//   console.log("Client is here!");
+//   socketIO.emit("dwitter", "Hello ~ !");
+//   socketIO.emit("dwitter", "Hello ~ !");
+// });
+
+initSocket(server);
