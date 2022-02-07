@@ -74,4 +74,5 @@ const Tweets = memo(({ tweetService, username, addable }) => {
     </>
   );
 });
+
 export default Tweets;

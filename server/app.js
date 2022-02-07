@@ -7,6 +7,7 @@ import tweetsRouter from "./router/tweets.js";
 import authRouter from "./router/auth.js";
 import { config } from "./config.js";
 import { initSocket } from "./connection/socket.js";
+import { db } from "./db/database.js";
 // import { Server } from "socket.io";
 
 const app = express();
@@ -28,6 +29,7 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
+db.getConnection().then(() => console.log("connection success!"));
 const server = app.listen(config.host.port);
 // const socketIO = new Server(server, {
 //   cors: {
